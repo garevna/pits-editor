@@ -33,7 +33,7 @@
         Save
       </v-btn>
 
-      <v-btn v-if="!production" outlined @click="restoreFromProd">
+      <v-btn v-if="!production" outlined @click="restoreFromProd" class="ml-4">
         <v-icon color="#900">mdi-backup-restore</v-icon>
         Restore data from prod
       </v-btn>
@@ -126,8 +126,6 @@ export default {
 
   methods: {
     restoreFromProd () {
-      console.log(this.testMode)
-      console.log(restore)
       this.testMode && restore()
     },
 
