@@ -20,5 +20,5 @@ export const restore = async () => {
       body: JSON.stringify(data)
     })
   }
-  location.reload()
+  // location.reload()
 }

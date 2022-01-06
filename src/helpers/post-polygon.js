@@ -12,7 +12,6 @@ export const postPolygon = async (polygonId) => {
   const { typeOf } = properties
 
   const endpoint = endpoints[availablePolygonTypes.findIndex(type => type === typeOf)]
-  console.log(endpoint)
 
   let response = await fetch(`${hostHandler()}/polygons/${endpoint}`, {
     method: 'POST',
@@ -28,8 +27,6 @@ export const postPolygon = async (polygonId) => {
 
   const newPolygonId = (await response.json()).data
 
-  console.log(newPolygonId)
-
   response = await fetch(`${hostHandler()}/polygons/${endpoint}/${newPolygonId}`, {
     method: 'PATCH',
     headers: {
@@ -40,5 +37,7 @@ export const postPolygon = async (polygonId) => {
     body: JSON.stringify({ properties: Object.assign(polygon.properties, { id: newPolygonId }) })
   })
 
-  return await response.json()
+  // return await response.json()
+
+  return newPolygonId
 }

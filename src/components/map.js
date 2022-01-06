@@ -159,7 +159,6 @@ class Map {
 
   changePolygonMarkerPosition (markerIndex) {
     return function (event) {
-      console.log(this.selectedPolygon.id)
       this.selectedPolygon.getPath().setAt(markerIndex, event.latLng)
       localStorage.updateMarkerPosition(this.selectedPolygon.id, markerIndex, [event.latLng.lng(), event.latLng.lat()])
     }.bind(this)
@@ -209,6 +208,13 @@ class Map {
       const polygons = features.map(feature => this.buildPolygon(feature, type))
       this[type] = polygons
     }
+  }
+
+  changePolygonId (event) {
+    const { polygonType, oldValue, newValue } = event.details
+    const index = this[polygonType].findIndex(polygon => polygon.id === oldValue)
+    if (index === -1) return
+    Object.assign(this[polygonType][index], { id: newValue })
   }
 
   switchToDrawingMode () {

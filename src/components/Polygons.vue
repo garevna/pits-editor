@@ -16,6 +16,8 @@
           />
         </v-card>
         <v-card flat class="mx-auto my-2 text-right">
+          <!-- <v-progress-linear v-if="progress" value="progress" indeterminate color="#900" /> -->
+
           <v-btn v-if="selectedPolygonId" outlined color="#900" @click="deletePolygon">
             <v-icon color="#900">mdi-delete</v-icon>
             Remove polygon
@@ -41,6 +43,8 @@
     <v-card-text v-else>
       Access denied. You have no rights to save updates.
     </v-card-text>
+
+    <!-- <MessagePopup /> -->
   </v-container>
 </template>
 
@@ -80,7 +84,9 @@ export default {
     remove: false,
     save: false,
 
-    testMode: location.origin !== 'https://portal.dgtek.net'
+    // progress: false,
+
+    testMode: location.origin !== 'https://dka.portal.dgtek.net'
   }),
 
   computed: {
@@ -127,6 +133,8 @@ export default {
   methods: {
     restoreFromProd () {
       this.testMode && restore()
+      localStorage.clear()
+      this.getData()
     },
 
     async getData () {
@@ -155,6 +163,8 @@ export default {
       const type = removePolygon(this.selectedPolygonId)
       this.map.removePolygon(type, this.selectedPolygonId)
 
+      localStorage.removeFeatureById(this.selectedPolygonId)
+
       this.selectedPolygonId = undefined
       this.remove = false
     },
@@ -176,6 +186,8 @@ export default {
         center: { lat: -37.8357725, lng: 144.9738764 }
       })
 
+      window.addEventListener('polygon-id-changed', this.map.changePolygonId.bind(this.map))
+
       const callbacks = {
         'polygon-selected': this.selectedPolygonCallback,
         'polygon-type-changed': this.map.changePolygonType.bind(this.map),
@@ -194,7 +206,15 @@ export default {
       this.drawingMode = event.type === 'drawing-mode-on'
     },
 
-    saveData: save
+    async saveData () {
+      this.$root.$emit('progress-event', true)
+      await save()
+      this.$root.$emit('progress-event', false)
+      this.$root.$emit('open-message-popup', {
+        messageType: 'Polygons',
+        messageText: 'Polygons data saved'
+      })
+    }
   },
 
   beforeMount () {
@@ -208,7 +228,6 @@ export default {
 
   mounted () {
     window.addEventListener('polygons-data-ready', this.initMap)
-    console.log('Polygons production: ', production())
   }
 }
 </script>

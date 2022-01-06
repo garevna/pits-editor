@@ -9,7 +9,15 @@ export const save = async (polygonId) => {
     const collection = localStorage.getItemByName(type)
     for (const polygonId of collection) {
       if (polygonId.indexOf('new-polygon') !== -1) {
-        await postPolygon(polygonId)
+        const newPolygonId = await postPolygon(polygonId)
+        localStorage.updateFeatureId(polygonId, newPolygonId)
+        window.dispatchEvent(Object.assign(new Event('polygon-id-changed'), {
+          details: {
+            polygonType: type,
+            oldValue: polygonId,
+            newValue: newPolygonId
+          }
+        }))
         continue
       }
       Object.keys(deletedPolygonsHandler()).includes(polygonId) || promises.push(patchPolygon(polygonId).catch(error => console.warn(error)))
@@ -18,4 +26,14 @@ export const save = async (polygonId) => {
   }
 
   await deletePolygons()
+
+  window.dispatchEvent(Object.assign(new Event('polygons-data-saved'), {
+    details: {
+      message: true,
+      messageType: 'Polygons',
+      mesageText: 'Data saved'
+    }
+  }))
+
+  return true
 }

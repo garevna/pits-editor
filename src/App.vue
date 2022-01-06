@@ -25,6 +25,20 @@ export default {
     host: location.origin === 'https://portal.dgtek.net' ? 'https://portal.dgtek.net' : 'https://portal.staging.dgtek.net',
     apiKey: process.env.VUE_APP_AUTHORIZATION_KEY,
     credentials: process.env.VUE_APP_ADMIN_CREDENTIALS
-  })
+  }),
+
+  methods: {
+    showEventDetails (event) {
+      console.log('EVENT:\n', event.details)
+    }
+  },
+
+  beforeDestroy () {
+    window.removeEventListener('polygons-data-saved', this.showEventDetails)
+  },
+
+  mounted () {
+    window.addEventListener('polygons-data-saved', this.showEventDetails)
+  }
 }
 </script>

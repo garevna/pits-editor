@@ -13,7 +13,6 @@ export const deletePolygons = async () => {
   const promises = []
 
   for (const id in removed) {
-    console.log(id, removed[id])
     const promise = await fetch(`${hostHandler()}/polygons/${removed[id]}/${id}`, {
       method: 'DELETE',
       headers: {
