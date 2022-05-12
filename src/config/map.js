@@ -26,6 +26,11 @@ export const mapConfig = [
   },
   {
     featureType: 'poi',
+    elementType: 'labels',
+    stylers: [{ visibility: 'off' }]
+  },
+  {
+    featureType: 'poi',
     elementType: 'geometry',
     stylers: [{ color: '#f5f5f5' }, { lightness: 21 }]
   },

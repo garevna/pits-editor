@@ -1,39 +1,29 @@
 import { getContainer } from './get-container'
 
-import { loadGoogleMapsScript } from './load-google-maps-script'
+import { loadGoogleChartScript } from './load-google-chart-script'
+import { unloadGoogleChartScript } from './unload-google-chart-script'
 
-import { createDrawLayer } from './create-draw-layer'
+// import { createMarker } from './create-marker'
 
-import { getPolygonsByType } from './get-polygons-by-type'
+import { getPits } from './get-pits'
 
-import { updatePolygonGeometry } from './update-polygon-geometry'
-import { updatePolygonType } from './update-polygon-type'
-import { removePolygon } from './remove-polygon'
-
-import { postPolygon } from './post-polygon'
-import { patchPolygon } from './patch-polygon'
-import { deletePolygons } from './delete-polygons'
-import { save } from './save'
-import { restore } from './restore'
+import { postPit } from './post-pit'
+import { patchPit } from './patch-pit'
+import { removePit } from './remove-pit'
 
 import { showErrorMessage } from './show-error-message'
 
 export {
   getContainer,
-  loadGoogleMapsScript,
+  loadGoogleChartScript,
+  unloadGoogleChartScript,
 
-  createDrawLayer,
+  // createMarker,
 
-  getPolygonsByType,
-  updatePolygonGeometry,
-  updatePolygonType,
-  removePolygon,
-
-  patchPolygon,
-  postPolygon,
-  deletePolygons,
-  save,
-  restore,
+  getPits,
+  patchPit,
+  postPit,
+  removePit,
 
   showErrorMessage
 }

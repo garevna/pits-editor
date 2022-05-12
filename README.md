@@ -1,23 +1,37 @@
-# dgtek-portal-polygons-editor
+# dgtek-portal-pits-editor
 
 ### Install
 ```
-yarn add dgtek-portal-polygons-editor
+yarn add dgtek-portal-pits-editor
 ```
 
 ### Import
 
-```
-import 'dgtek-portal-polygons-editor'
-import 'dgtek-portal-polygons-editor/dist/dgtek-polygons.css'
+```js
+import 'dgtek-portal-pits-editor'
+import 'dgtek-portal-pits-editor/dist/dgtek-portal-pits-editor.css'
 ```
 
 ### Usage
 
-```
-<Polygons
+```html
+<Pits
   :host="host"
   :apiKey="apiKey"
   :credentials="credentials"
 />
+```
+
+### Listener for save data event
+
+```js
+window.addEventListener('pits-data-saved', function (event) {
+  console.log(event.details)
+})
+
+// details: {
+//   message: true,
+//   messageType: 'Pits',
+//   mesageText: 'Data saved'
+// }
 ```

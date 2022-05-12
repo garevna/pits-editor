@@ -1,29 +1,30 @@
 {
-  "name": "dgtek-portal-polygons-editor",
-  "version": "1.1.0",
-  "description": "Package for DGtek provisioning portal.",
+  "name": "dgtek-portal-pits-editor",
+  "version": "1.0.94",
+  "description": "Package for DGtek admin provisioning portal.",
   "author": "garevna <irina.h.fylyppova@gmail.com>",
   "keywords": [
     "dgtek",
     "portal",
-    "polygons",
+    "pit",
     "admin",
     "npm",
     "registry",
-    "google map"
+    "google charts"
   ],
-  "repository": "https://github.com/garevna/polygons-editor.git",
-  "main": "./dist/dgtek-portal-polygons-editor.common.js",
+  "repository": "https://github.com/garevna/pits-editor.git",
+  "main": "./dist/dgtek-portal-pits-editor.common.js",
   "scripts": {
     "serve": "set PORT=8083 && vue-cli-service serve",
     "build": "vue-cli-service build",
-    "package": "vue-cli-service build --target lib --name dgtek-portal-polygons-editor ./src/components/polygons-index.js",
+    "package": "vue-cli-service build --mode production --target lib --name dgtek-portal-pits-editor ./src/components/pits-index.js",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint"
   },
   "files": [
     "dist/*",
     "css/*",
+    "img/*",
     "README.md"
   ],
   "dependencies": {

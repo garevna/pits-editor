@@ -2,9 +2,9 @@ import { credentialsHandler } from './credentials-handler'
 import { apiKeyHandler } from './api-key-handler'
 import { hostHandler } from './host-handler'
 
-import { production } from './mode-handler'
+import { googleApiKeyHandler } from './google-api-key-handler'
 
-import { deletedPolygonsHandler } from './deleted-polygons-handler'
+import { production } from './mode-handler'
 
 export {
   production,
@@ -12,6 +12,5 @@ export {
   credentialsHandler,
   apiKeyHandler,
   hostHandler,
-
-  deletedPolygonsHandler
+  googleApiKeyHandler
 }
